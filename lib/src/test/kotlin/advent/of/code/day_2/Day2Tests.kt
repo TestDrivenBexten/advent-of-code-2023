@@ -53,4 +53,30 @@ class Day2Tests {
         val sum = possibleGameList.map { it.id }.sum()
         assertEquals(2_593, sum)
     }
+
+    @Test
+    @DisplayName("Should solve for small input part 2")
+    fun should_solve_for_small_input_part_2() {
+        val path = Paths.get("src/test/kotlin/advent/of/code/day_2/Day2Small.txt")
+        val strList = readStringListFromPath(path)
+
+        val gameList = strList.map(::parseGame)
+        val minBallCountList = gameList.map(::calculateMinBallCount)
+
+        val sum = minBallCountList.map { it.redCount * it.greenCount * it.blueCount }.sum()
+        assertEquals(2_286, sum)
+    }
+
+    @Test
+    @DisplayName("Should solve for big input part 2")
+    fun should_solve_for_big_input_part_2() {
+        val path = Paths.get("src/test/kotlin/advent/of/code/day_2/Day2Big.txt")
+        val strList = readStringListFromPath(path)
+
+        val gameList = strList.map(::parseGame)
+        val minBallCountList = gameList.map(::calculateMinBallCount)
+
+        val sum = minBallCountList.map { it.redCount * it.greenCount * it.blueCount }.sum()
+        assertEquals(54_699, sum)
+    }
 }

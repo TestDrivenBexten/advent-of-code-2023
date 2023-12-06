@@ -4,6 +4,7 @@ enum class Color {
 
 data class Draw(val redCount: Int, val greenCount: Int, val blueCount: Int)
 
+data class MinBallCount(val redCount: Int, val greenCount: Int, val blueCount: Int)
 data class Game(val id: Int, val drawList: List<Draw>)
 
 val gameRegex = "Game (\\d+)".toRegex()
@@ -65,4 +66,11 @@ fun parseCount(input: String): Pair<Color, Count> {
         val redCount = red?.value?.toInt() ?: 0
         Pair(Color.RED, redCount)
     }
+}
+
+fun calculateMinBallCount(game: Game) : MinBallCount {
+    val redCount = game.drawList.map { it.redCount }.max()
+    val blueCount = game.drawList.map { it.blueCount }.max()
+    val greenCount = game.drawList.map { it.greenCount }.max()
+    return MinBallCount(redCount, greenCount, blueCount)
 }
